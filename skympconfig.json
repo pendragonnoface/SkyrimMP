@@ -335,8 +335,7 @@
         "ParamFieldName": "$['startPoints'][0]['pos'][0]",
         "IncludeInCommandLine": false,
         "DefaultValue": "133857",
-        "EnumValues": {},
-        "MultipleOf": "0.01"
+        "EnumValues": {}
     },
     {
         "DisplayName": "Spawn Y",
@@ -350,8 +349,7 @@
         "ParamFieldName": "$['startPoints'][0]['pos'][1]",
         "IncludeInCommandLine": false,
         "DefaultValue": "-61130",
-        "EnumValues": {},
-        "MultipleOf": "0.01"
+        "EnumValues": {}
     },
     {
         "DisplayName": "Spawn Z",
@@ -365,8 +363,7 @@
         "ParamFieldName": "$['startPoints'][0]['pos'][2]",
         "IncludeInCommandLine": false,
         "DefaultValue": "14662",
-        "EnumValues": {},
-        "MultipleOf": "0.01"
+        "EnumValues": {}
     },
     {
         "DisplayName": "Spawn Facing Angle",
