@@ -1,0 +1,16 @@
+[
+    {
+        "Protocol": "UDP",
+        "Port": 7777,
+        "Ref": "ServerPort",
+        "Name": "Game Port (UDP)",
+        "Description": "Main SkyMP game port. Players connect here."
+    },
+    {
+        "Protocol": "TCP",
+        "Port": 3000,
+        "Ref": "UIPort",
+        "Name": "UI / Resources Port (TCP)",
+        "Description": "Chat and UI files. SkyMP uses 3000 when the game port is 7777, otherwise game port + 1. The pre-flight check warns if these don't match."
+    }
+]

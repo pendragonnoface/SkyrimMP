@@ -1,0 +1,32 @@
+[
+  {
+    "UpdateStageName": "Back Up World",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "Executable",
+    "UpdateSourceData": "/bin/bash",
+    "UpdateSourceArgs": "-c \"cd '{{$FullBaseDir}}' && DB='{{SkympDbName}}' && [ -n \\\"$DB\\\" ] && { [ -e \\\"$DB\\\" ] || [ -e \\\"$DB.zip\\\" ]; } || { echo '[backup] no world yet - nothing to back up'; exit 0; }; mkdir -p backups && STAMP=$(date +%Y%m%d-%H%M%S) && tar -czf backups/world-$STAMP.tar.gz --ignore-failed-read $DB $DB.zip server-settings.json staff.json bans.json whitelist.json 2>/dev/null; echo \\\"[backup] saved backups/world-$STAMP.tar.gz\\\"; ls -1t backups/world-*.tar.gz 2>/dev/null | tail -n +$(( {{BackupsToKeep}} + 1 )) | xargs -r rm -f\"",
+    "UpdateSourceConditionSetting": "BackupOnStart",
+    "UpdateSourceConditionValue": "true",
+    "SkipOnFailure": true
+  },
+  {
+    "UpdateStageName": "SkyMP Pre-flight Checks",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "Executable",
+    "UpdateSourceData": "/bin/bash",
+    "UpdateSourceArgs": "-c \"cd '{{$FullBaseDir}}' && if [ -f europia-preflight.js ]; then '{{$FullRootDir}}node/bin/node' europia-preflight.js {{$ServerPort}} {{$UIPort}}; else echo '[preflight] europia-preflight.js not found - run scripts/04-install-into-amp.sh again. Skipping checks.'; fi\"",
+    "UpdateSourceConditionSetting": "RunPreflight",
+    "UpdateSourceConditionValue": "true",
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Run App Pre-start Commands",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "Executable",
+    "UpdateSourceData": "/bin/bash",
+    "UpdateSourceArgs": "-c \"cd node-server/app/{{ApplicationLocation}} && export PATH=\\\"{{$FullRootDir}}node/bin:$PATH\\\" && {{AppPrestartCommands}}\"",
+    "UpdateSourceConditionSetting": "RunAppPrestartCommands",
+    "UpdateSourceConditionValue": "true",
+    "SkipOnFailure": false
+  }
+]
